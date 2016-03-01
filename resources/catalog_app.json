@@ -1,0 +1,64 @@
+{
+  "app_list": [
+    {
+      "app_name": "one",
+      "package_id": "com.one",
+      "app_info": "one des",
+      "category_id": "",
+      "app_logo": "http://c0042759.itcs.hp.com:3000/uploads/com.one/icon.jpg",
+      "alt_logo": "one",
+      "package_list": [
+        {
+          "os_type": "Android",
+          "last_modified": 1428481562106,
+          "bytes": 4676723,
+          "version_code": "1.0.0",
+          "install_url": "http://c0042759.itcs.hp.com:3000/uploads/com.one/Android/1.0.0/com.one.apk",
+          "active_flag": true,
+          "min_os": "2.0.0",
+          "max_os": "3.2.1"
+        },
+        {
+          "os_type": "iOS",
+          "last_modified": 1428481581328,
+          "bytes": 5145199,
+          "version_code": "1.0.0",
+          "install_url": "itms-services:///?action=download-manifest&url=http://c0042759.itcs.hp.com:3000/uploads/com.one/iOS/1.0.0/com.one.plist",
+          "active_flag": true,
+          "min_os": "1.1.0",
+          "max_os": "3.1.0"
+        },
+        {
+          "os_type": "Windows",
+          "last_modified": 1428481738057,
+          "bytes": 5145199,
+          "version_code": "1.0.0",
+          "install_url": "http://c0042759.itcs.hp.com:3000/uploads/com.one/Windows/1.0.0/com.one.xap",
+          "active_flag": true,
+          "min_os": "8.0.0",
+          "max_os": "8.0.0"
+        }
+      ]
+    },
+    {
+      "app_name": "two",
+      "package_id": "two.com.hp",
+      "app_info": "two test",
+      "category_id": "",
+      "app_logo": "http://c0042759.itcs.hp.com:3000/uploads/two.com.hp/icon.jpg",
+      "alt_logo": "two",
+      "package_list": [
+        {
+          "os_type": "Android",
+          "last_modified": 1428482081800,
+          "bytes": 4676723,
+          "version_code": "1.0.0",
+          "install_url": "http://c0042759.itcs.hp.com:3000/uploads/two.com.hp/Android/1.0.0/two.com.hp.apk",
+          "active_flag": true,
+          "min_os": "2.2.0",
+          "max_os": "4.0.4"
+        }
+      ]
+    }
+  ]
+}

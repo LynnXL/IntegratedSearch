@@ -1,0 +1,55 @@
+<div class="container" ng-controller="appListController">
+  <div alert-message id="app-list" class="row alert-message-pipeline"></div>
+<!--  <div class="row app-status-bar">
+    <span class="col-lg-4 text-center">
+      {{appCount}} Apps
+	  </span>
+     <span class="col-lg-4 text-center">
+      {{iOSCount}} iOS Packages
+	  </span>
+    <span class="col-lg-4 text-center">
+      {{androidCount}} Android Packages
+	  </span> 
+  </div>-->
+  <div class="row">
+    <div class="col-lg-12 app-list-toolbar">
+      <button type="button" class="btn btn-primary" ng-click='go("/editApp")'>New App</button>
+      <button type="button" class="btn btn-primary" ng-click='refreshAppList()'>Refresh</button>
+      <span class="num-stat text-center pull-right">
+       {{appCount}} Apps
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+			<div ui-grid="gridOptions" ui-grid-resize-columns ui-grid-expandable ui-grid-selection class="app-list"></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="appConfirmModal.html">
+  <div class="modal-header">
+      <div class="modal-title"><span style="font-size: 20px;">Confirm</span></div>
+  </div>
+  <div class="modal-body">
+      All app packages belong to this app will also be deleted if you delete. 
+      Delete this app ?  
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-warning" ng-click="removeApp(appName)">Delete</button>
+      <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="appPackageConfirmModal.html">
+  <div class="modal-header">
+      <div class="modal-title"><span style="font-size: 20px;">Confirm</span></div>
+  </div>
+  <div class="modal-body">
+      Delete this app package?  
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-warning" ng-click="removeAppPackage(appName, pack)">Delete</button>
+      <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

@@ -1,0 +1,19 @@
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{{errorTitle | i18n}}</h4>
+      </div>
+      <div class="modal-body">
+        {{errorContent | i18n}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <span class="glyphicon glyphicon-ok"></span> {{'OK' | i18n}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
