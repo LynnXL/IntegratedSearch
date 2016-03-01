@@ -1,0 +1,200 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/style.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+// @import "compass/reset";
+
+@import "compass/css3/transform";
+@import "compass/css3/user-interface";
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+body {
+  padding-top: 70px;
+}
+
+.num-stat {
+  height: 50px;
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.app-list {
+  text-align: center;
+  .app-logo-cell {
+    padding-top: 9px;
+  }
+}
+
+.app-version {
+  color: #f8f8f8;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.form-inline {
+  margin-bottom: 15px;
+}
+
+.package-list-header {
+  margin-left: 40px;
+}
+
+ul.package-list {
+  width: 100%;
+  li {
+    list-style: none;
+    width: 100%;
+    padding: 5px 0px;
+    margin: 2px 0px;
+    text-align: center;
+    button {
+      width: 80%;
+    }
+    img {
+      vertical-align: middle;
+      width: 32px;
+    }
+  }
+}
+
+.ui-grid-render-container-body .ui-grid-viewport{
+  overflow: auto !important;
+
+}
+
+.my-drop-zone { border: dotted 3px lightgray !important; }
+.nv-file-over { border: dotted 3px red !important; } 
+.drap-over-file-class { border: dotted 3px green !important; }
+
+.form-create-new-app {
+  canvas {
+    background-color: #f3f3f3;
+    -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+    box-shadow: 3px 3px 3px 0 #e3e3e3;
+    border: 1px solid #c3c3c3;
+    height: 100px;
+    margin: 6px 0 0 6px;
+  }
+}
+
+.icon-refresh-animate {
+  -webkit-animation-name: rotateThis;
+  -webkit-animation-duration: .8s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotateThis {
+  from { transform: scale( 1 ) rotate( 0deg );   }
+  to   { transform: scale( 1 ) rotate( 360deg ); }
+}
+
+.app-action-item {
+  font-size: 20px;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    color: lightblue;
+  }
+}
+
+.package-action-item {
+  font-size: 15px;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    color: green;
+  }
+}
+
+.package-action-item:hover {
+  color: green;
+}
+
+.ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-cell:last-child {
+  border-width: 0px !important;
+}
+.ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-header-cell:last-child {
+  border: none !important;
+}
+.ui-grid-row-header-cell {
+  background-color: transparent !important;
+}
+
+.ui-grid-expandable-buttons-cell {
+  font-size: 18px;
+}
+
+.ui-grid-top-panel {
+  .ui-grid-expandable-buttons-cell {
+    display: none;
+  }
+}
+
+.ui-grid-icon-plus-squared, .ui-grid-icon-minus-squared {
+  color: #74AECB;
+}
+
+.spinner {
+  padding: 15px;
+  font-size: 15px;
+  /*display: none;*/
+}
+
+.btn-app-save {
+  width: 100%;
+}
+
+.field-required {
+  color: #F93434;
+  font-size: 20px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+
+.app-list-toolbar {
+  margin-bottom: 10px;
+}
+
+.alert-message-pipeline {
+  height: auto;
+  z-index: 1040;
+  top: 60px;
+  text-align: center;
+}

@@ -1,0 +1,77 @@
+<div alert-message id="IKS-Search" class="row alert-message-pipeline"></div>
+<form class="form-create-new-app" name="IKSSearch">
+  <div class="row">
+    <div class="col-sm-2 form-group">
+      <select  id="source" name="source" ng-model="source" ng-options="option.value as option.name for option in OptionInSearch"></select>
+    </div>
+    <div class="col-sm-2 form-group">
+      <label for="queryString" class="control-label" field-required>Query String</label>
+    </div>
+    <div class="col-sm-4 form-group" ng-class='editAppForm.queryString.$error.required ? "has-error" : ""'>
+      <input type="text" class="form-control" id="queryString" name="queryString"  ng-model="IKSSearch.query_string" required>
+    </div>
+
+   <!--   <div class="col-sm-2 form-group">
+      <label for="language" class="control-label" field-required>Language</label>
+    </div>
+    <div class="col-sm-4 form-group" ng-class='editAppForm.language.$error.required ? "has-error" : ""'>
+      <input type="text" class="form-control" id="language" name="language" ng-init="en-US" ng-model="IKSSearch.language" required>
+    </div> -->
+
+     
+         <div class="col-sm-2 form-group">
+          <button type="submit" class="btn btn-primary btn-app-save" ng-disabled="IKSSearch.$invalid" ng-click="SearchIKSList()">Search</button>
+        </div>
+    
+  </div>
+
+</form>
+
+
+
+
+
+ <div class="container package-area" id="searchContent"  ng-show="showKnowledgeList">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search Results</h3>
+        </div>
+        <div class="panel-body">
+            <p> This list contains {{searchItems.length}} documents.<br /></p>
+            <div class="row user-row" id="alertList" ng-repeat="searchItem in searchItems">
+                <div class="brdr bgc-fff pad-10 box-shad alert-listing well">
+                    <div class="media">
+                         <a id="chervonImage" class="pull-left" href="{{searchItem.KnowledgeURL}}" target="_blank">
+                              <h3 style="vertical-align:top; margin-top:2px" ng-bind="searchItem.KnowledgeTitle"></h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--displayUrl id-->
+
+ <div class="container package-area" id="searchContent"  ng-show="showgoogleList">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search Results</h3>
+        </div>
+        <div class="panel-body">
+            <p> This list contains {{googleSearchItem.length}} documents.<br /></p>
+            <div class="row user-row" id="alertList" ng-repeat="google_searchItem in googleSearchItem">
+                <div class="brdr bgc-fff pad-10 box-shad alert-listing well">
+                    <div class="media">
+                         <a id="chervonImage" class="pull-left" href="{{google_searchItem.url}}" target="_blank">
+                              <h3 style="vertical-align:top; margin-top:2px" ng-bind="google_searchItem.title"></h3>
+                        </a>
+                    </div>
+                    <div ng-bind="google_searchItem.description" class="detail"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 

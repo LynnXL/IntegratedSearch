@@ -1,0 +1,241 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/style.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 11, ../../css-generate/sass/app.scss */
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+/* line 18, ../../css-generate/sass/app.scss */
+.menu:before {
+  content: "[";
+}
+
+/* line 22, ../../css-generate/sass/app.scss */
+.menu:after {
+  content: "]";
+}
+
+/* line 26, ../../css-generate/sass/app.scss */
+.menu > li {
+  display: inline;
+}
+
+/* line 30, ../../css-generate/sass/app.scss */
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+/* line 35, ../../css-generate/sass/app.scss */
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/* line 40, ../../css-generate/sass/app.scss */
+body {
+  padding-top: 70px;
+}
+
+/* line 44, ../../css-generate/sass/app.scss */
+.num-stat {
+  height: 50px;
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* line 56, ../../css-generate/sass/app.scss */
+.app-list {
+  text-align: center;
+}
+/* line 58, ../../css-generate/sass/app.scss */
+.app-list .app-logo-cell {
+  padding-top: 9px;
+}
+
+/* line 63, ../../css-generate/sass/app.scss */
+.app-version {
+  color: #f8f8f8;
+  font-size: 20px;
+  padding: 10px;
+}
+
+/* line 69, ../../css-generate/sass/app.scss */
+.form-inline {
+  margin-bottom: 15px;
+}
+
+/* line 73, ../../css-generate/sass/app.scss */
+.package-list-header {
+  margin-left: 40px;
+}
+
+/* line 77, ../../css-generate/sass/app.scss */
+ul.package-list {
+  width: 100%;
+}
+/* line 79, ../../css-generate/sass/app.scss */
+ul.package-list li {
+  list-style: none;
+  width: 100%;
+  padding: 5px 0px;
+  margin: 2px 0px;
+  text-align: center;
+}
+/* line 85, ../../css-generate/sass/app.scss */
+ul.package-list li button {
+  width: 80%;
+}
+/* line 88, ../../css-generate/sass/app.scss */
+ul.package-list li img {
+  vertical-align: middle;
+  width: 32px;
+}
+
+/* line 95, ../../css-generate/sass/app.scss */
+.ui-grid-render-container-body .ui-grid-viewport {
+  overflow: auto !important;
+}
+
+/* line 100, ../../css-generate/sass/app.scss */
+.my-drop-zone {
+  border: dotted 3px lightgray !important;
+}
+
+/* line 101, ../../css-generate/sass/app.scss */
+.nv-file-over {
+  border: dotted 3px red !important;
+}
+
+/* line 102, ../../css-generate/sass/app.scss */
+.drap-over-file-class {
+  border: dotted 3px green !important;
+}
+
+/* line 105, ../../css-generate/sass/app.scss */
+.form-create-new-app canvas {
+  background-color: #f3f3f3;
+  -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  box-shadow: 3px 3px 3px 0 #e3e3e3;
+  border: 1px solid #c3c3c3;
+  height: 100px;
+  margin: 6px 0 0 6px;
+}
+
+/* line 116, ../../css-generate/sass/app.scss */
+.icon-refresh-animate {
+  -webkit-animation-name: rotateThis;
+  -webkit-animation-duration: .8s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotateThis {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
+}
+/* line 128, ../../css-generate/sass/app.scss */
+.app-action-item {
+  font-size: 20px;
+  padding: 5px;
+  cursor: pointer;
+}
+/* line 132, ../../css-generate/sass/app.scss */
+.app-action-item:hover {
+  color: lightblue;
+}
+
+/* line 137, ../../css-generate/sass/app.scss */
+.package-action-item {
+  font-size: 15px;
+  padding: 5px;
+  cursor: pointer;
+}
+/* line 141, ../../css-generate/sass/app.scss */
+.package-action-item:hover {
+  color: green;
+}
+
+/* line 146, ../../css-generate/sass/app.scss */
+.package-action-item:hover {
+  color: green;
+}
+
+/* line 150, ../../css-generate/sass/app.scss */
+.ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-cell:last-child {
+  border-width: 0px !important;
+}
+
+/* line 153, ../../css-generate/sass/app.scss */
+.ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-header-cell:last-child {
+  border: none !important;
+}
+
+/* line 156, ../../css-generate/sass/app.scss */
+.ui-grid-row-header-cell {
+  background-color: transparent !important;
+}
+
+/* line 160, ../../css-generate/sass/app.scss */
+.ui-grid-expandable-buttons-cell {
+  font-size: 18px;
+}
+
+/* line 165, ../../css-generate/sass/app.scss */
+.ui-grid-top-panel .ui-grid-expandable-buttons-cell {
+  display: none;
+}
+
+/* line 170, ../../css-generate/sass/app.scss */
+.ui-grid-icon-plus-squared, .ui-grid-icon-minus-squared {
+  color: #74AECB;
+}
+
+/* line 174, ../../css-generate/sass/app.scss */
+.spinner {
+  padding: 15px;
+  font-size: 15px;
+  /*display: none;*/
+}
+
+/* line 180, ../../css-generate/sass/app.scss */
+.btn-app-save {
+  width: 100%;
+}
+
+/* line 184, ../../css-generate/sass/app.scss */
+.field-required {
+  color: #F93434;
+  font-size: 20px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+
+/* line 191, ../../css-generate/sass/app.scss */
+.app-list-toolbar {
+  margin-bottom: 10px;
+}
+
+/* line 195, ../../css-generate/sass/app.scss */
+.alert-message-pipeline {
+  height: auto;
+  z-index: 1040;
+  top: 60px;
+  text-align: center;
+}

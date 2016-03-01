@@ -1,0 +1,16 @@
+---
+applications:
+- name: catalog-publisher
+  framework:
+    type: buildpack
+  env:
+    BUILDPACK_URL: git://github.com/heroku/heroku-buildpack-nodejs.git
+  mem: 128M
+  services:
+    ${name}-data: filesystem
+  stackato:
+    hooks:
+      post-staging:
+      - sh helion-setup.sh
+    
+

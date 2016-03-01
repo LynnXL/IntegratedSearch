@@ -1,0 +1,177 @@
+<div alert-message id="edit-app" class="row alert-message-pipeline"></div>
+<form class="form-create-new-app" name="editAppForm">
+  <div class="row">
+    <div class="col-sm-2 form-group">
+      <label for="appName" class="control-label" field-required>App Name</label>
+    </div>
+    <div class="col-sm-4 form-group" ng-class='editAppForm.appName.$error.required ? "has-error" : ""'>
+      <input type="text" class="form-control" id="appName" name="appName" ng-disabled="!creatingAppStatus" ng-model="currentApp.app_name" required>
+    </div>
+    <div class="col-sm-2 form-group">
+      <label for="packageId" class="control-label" field-required>Package ID</label>
+    </div>
+    <div class="col-sm-4 form-group" ng-class='(editAppForm.packageId.$error.required || editAppForm.packageId.$error.pattern) ? "has-error" : ""'>
+      <input type="text" class="form-control" id="packageId" name="packageId" ng-model="currentApp.package_id" ng-pattern="/^[a-z][a-z0-9_]*(\.[a-z0-9_]+)+[0-9a-z_]*$/" ng-disabled="!creatingAppStatus" required>
+    </div>
+  </div>
+  <div class="row form-group">
+    <label for="appInfo" class="col-sm-2 control-label" field-required>Description</label>
+    <div class="col-sm-10" ng-class='editAppForm.appInfo.$error.required ? "has-error" : ""'>
+      <textarea class="form-control" id="appInfo" name="appInfo" rows="3" ng-model="currentApp.app_info" required></textarea>
+    </div>
+  </div>
+  <div class="row form-group">
+    <label for="appLogo" class="col-sm-2 control-label" field-required>Icon</label>
+    <div class="col-sm-3" ng-show="!creatingAppStatus">
+        <img style="max-width: 200px; min-width: 50px;" ng-src="{{currentApp.app_logo}}">
+    </div>
+    <div class="col-sm-3">
+      <div class="well my-drop-zone" nv-file-drop="" nv-file-over="" over-class="drap-over-file-class" uploader="uploader">
+        Drag file here
+      </div>
+      <input type="file" nv-file-select uploader="uploader"/>
+    </div>
+    <div class="col-sm-4 offset-sm-1">
+      <ul>
+        <li ng-repeat="item in uploader.queue">
+            <span ng-bind="item.file.name"></span><br/>
+            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+            <div class="progress" style="margin-bottom: 0;">
+              <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 0%;"></div>
+            </div>
+            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                <span class="glyphicon glyphicon-upload"></span> Upload
+            </button>
+            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+              <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-sm-offset-8 col-sm-2">
+      <button type="submit" class="btn btn-primary btn-app-save" ng-click="ok()" ng-disabled="!logoFileReady || !editAppForm.$valid || !editAppForm.$dirty">Save</button>
+    </div>
+  </div>
+  <input type="hidden" name="appLogo" ng-model="currentApp.app_logo">
+</form>
+
+<div class="container package-area" ng-show="!creatingAppStatus">
+  <tabset justified="false">
+    <tab heading="{{osKey}}" ng-repeat="(osKey, osObj) in availableOS">
+      <ul class="package-list">
+        <li><button class="btn btn-info" ng-click="open(osKey, currentApp)">Add New</button></li>
+        <li ng-repeat="pack in splitedPackageList[osKey] | orderBy:'-version_code'"><button class="btn btn-default" ng-click='open(osKey, currentApp, pack)'>{{pack.version_code}}</button></li>
+      </ul>
+    </tab>
+  </tabset>
+<!--
+  <div class="row">
+    <div class="col-md-6">
+      <div class="package-list-header text-center"></div>
+      <ul class="package-list">
+        <li><button class="btn btn-default" ng-click="open(10001, currentApp)">Add New</button></li>
+        <li ng-repeat="pack in iOSPackages | orderBy:'-version_code'"><button class="btn btn-default" ng-click='open(10001, currentApp, pack)'>{{pack.version_code}}</button></li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <div class="package-list-header text-center"><img ng-src="img/osLogo/android_sm.png"></div>
+      <ul class="package-list">
+        <li><button class="btn btn-default" ng-click="open(10002, currentApp)">Add New</button></li>
+        <li ng-repeat="pack in androidPackages | orderBy:'-version_code'"><button class="btn btn-default" ng-click='open(10002, currentApp, pack)'>{{pack.version_code}}</button></li>
+      </ul>
+    </div>
+  </div> -->
+</div>
+
+<script type="text/ng-template" id="editPackageModal.html">
+  <div class="modal-header">
+      <div class="modal-title"><span style="font-size: 20px;">Edit App Package for {{osTypeCode}}</span><span tiny-spinner spin-key="package-modal-spin"></span></div>
+  </div>
+  <div class="modal-body">
+    <div alert-message id="package-modal" class="row alert-message-pipeline"></div>
+    <form class="form-edit-app-package" id="packageForm" name="packageForm" enctype="multipart/form-data" action="/api/uploadPackageFile" method="post">
+      <input type="hidden" name="appName" ng-model="currentApp.app_name">
+      <input type="hidden" name="osTypeCode" ng-model="osTypeCode">
+      <div class="row form-group">
+        <label for="versionCode" class="col-sm-2 control-label" field-required>Version Code</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control col-sm-4" id="versionCode" name="versionCode" ng-disabled="!creatingAppPackageStatus" ng-model="currentAppPackage.version_code">
+        </div>
+        <div class="col-sm-4">
+          <span class="label label-danger" data-ng-show="submitted && currentAppPackage.version_code === ''">Required!</span>
+          <span class="label label-danger" data-ng-show="submitted && !versionCodeValidation">Invalid Version Code!</span>
+        </div>
+      </div>
+      <div class="row form-group" ng-show="creatingAppPackageStatus && packageFile || !creatingAppPackageStatus">
+        <label for="bytes" class="col-sm-2 control-label">Size</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control col-sm-4" id="bytes" name="bytes" ng-show="currentAppPackage.bytes > 0" disabled ng-model="currentAppPackage.bytes">
+        </div>
+      </div>
+      <div class="row form-group">
+        <label for="bytes" class="col-sm-2 control-label" field-required>Min OS</label>
+        <div class="col-sm-4">
+        <select class="form-control" id="minOS" ng-model="currentAppPackage.min_os" name="minOS">
+          <option ng-repeat='key in matchedOsInfo' value="{{key}}" ng-selected="currentAppPackage.min_os === key">{{key}}</option>
+        </select>
+        </div>
+        <label for="bytes" class="col-sm-2 control-label" field-required>Max OS</label>
+        <div class="col-sm-4">
+          <select class="form-control" id="maxOS" ng-model="currentAppPackage.max_os" name="maxOS">
+            <option ng-repeat='key in matchedOsInfo' value="{{key}}" ng-selected="currentAppPackage.max_os === key">{{key}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row form-group" ng-show="!creatingAppPackageStatus" >
+        <label for="lastModified" class="col-sm-2 control-label">Last Modified</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control col-sm-10" id="lastModified" name="lastModified" disabled ng-model="currentAppPackage.last_modified">
+        </div>
+      </div>
+      <div class="row form-group" ng-show="!creatingAppPackageStatus || currentAppPackage.install_url.length > 0" >
+        <label for="installUrl" class="col-sm-2 control-label">Install Url</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control col-sm-10" id="installUrl" name="installUrl" disabled ng-model="currentAppPackage.install_url">
+        </div>
+      </div>
+      <div class="row form-grooup" ng-show="uploader.isHTML5 && creatingAppPackageStatus">
+        <label for="uploadPackage" class="col-sm-2 control-label" field-required>Upload Package</label>
+        <div class="col-sm-4" ng-show="uploader.isHTML5 && creatingAppPackageStatus">
+          <div class="well my-drop-zone" nv-file-drop="" nv-file-over="" over-class="drap-over-file-class" uploader="uploader">
+            Drag file here
+          </div>
+          <input type="file" nv-file-select uploader="uploader"/>
+        </div>
+        <div class="col-sm-6">
+          <ul>
+            <li ng-repeat="item in uploader.queue">
+                <span ng-bind="item.file.name"></span><br/>
+                <div class="progress" style="margin-bottom: 0;">
+                  <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 0%;"></div>
+                </div>
+                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                  <span class="glyphicon glyphicon-upload"></span> Upload
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                <span class="glyphicon glyphicon-trash"></span> Remove
+               </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+    <div class="row" ng-show="qrUrl !== ''">
+      <label for="installUrl" class="col-sm-2 control-label">Scan to Install</label>
+      <div class="col-sm-10">
+        <qrcode version="9" error-correction-level="M" size="200" data="{{qrUrl}}"></qrcode>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      <!-- <button class="btn btn-warning" ng-click="delete()" ng-show="!creatingAppPackageStatus">Delete</button> -->
+      <button class="btn btn-primary" ng-click="ok()" ng-disabled="!packageFileReady || !packageForm.$dirty">Save</button>
+  </div>
+</script>
